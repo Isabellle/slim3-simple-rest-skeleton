@@ -5,6 +5,7 @@ return [
         // Slim Settings
         'determineRouteBeforeAppMiddleware' => false,
         'displayErrorDetails' => false,
+        'PoweredBy' => 'PR2StudioAPI',
 
         // database settings
         'pdo' => [

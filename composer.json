@@ -22,6 +22,7 @@
     },
     "require": {
         "slim/slim": "^3.0",
-        "monolog/monolog": "^1.13"
+        "monolog/monolog": "^1.13",
+        "slim/http-cache": "^0.3.0"
     }
 }

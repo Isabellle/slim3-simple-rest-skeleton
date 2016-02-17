@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Action;
+namespace App\Controllers;
 
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
- * Class HomeAction.
+ * Class ApiController.
  */
-final class HomeAction
+final class ApiController
 {
     /**
      * @var \Psr\Log\LoggerInterface
@@ -17,11 +17,18 @@ final class HomeAction
     private $logger;
 
     /**
-     * @param \Psr\Log\LoggerInterface $logger
+     * @var string
      */
-    public function __construct(LoggerInterface $logger)
+    private $powered;
+
+    /**
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param string $powered
+     */
+    public function __construct(LoggerInterface $logger, $powered)
     {
-        $this->logger = $logger;
+        $this->logger  = $logger;
+        $this->powered = $powered;
     }
 
     /**
@@ -31,12 +38,10 @@ final class HomeAction
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function dispatch(Request $request, Response $response, $args)
+    public function showHello(Request $request, Response $response, $args)
     {
-        $this->logger->info('Home page action dispatched');
+        $this->logger->info(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
 
-        $response->write('Hello, World!');
-
-        return $response;
+        return $response->write($this->powered.' using Slim 3 Framework');
     }
 }
