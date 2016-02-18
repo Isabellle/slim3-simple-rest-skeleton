@@ -24,8 +24,9 @@ Take your time to understand how Slim works. http://www.slimframework.com/docs
 
 To explain
 
+## Steps for any new table
 
-## Create Database
+1 Create Database
 
 ```sql
 CREATE TABLE IF NOT EXISTS `books` (
@@ -42,4 +43,44 @@ ALTER TABLE `books`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 ```
 
-I will write further documentation.
+2 Add the routes (routes.php) Add the controller to the resources. Where _Controller is the generic CRUD controller
+
+```php
+// Books controller
+$app->group('/books', function () {
+    $this->get   ('',             _Controller::class.':getAll');
+    $this->get   ('/{id:[0-9]+}', _Controller::class.':get');
+    $this->post  ('',             _Controller::class.':add');
+    $this->put   ('/{id:[0-9]+}', _Controller::class.':update');
+    $this->delete('/{id:[0-9]+}', _Controller::class.':delete');
+});
+```
+
+3. Prepare the Dependencies (dependencies.php)
+
+If you just want to use the basic CRUD. Nothing to do here! 
+
+If you want to change Controller / DatabaseAccess add this:
+
+At the beginning:
+
+```php
+use App\Controllers\MyCustomController;
+use App\DataAccess\MyCustomDataAccess;
+```
+
+at the end:
+
+```php
+// Custom Controllers / DataAccess
+$container['App\Controllers\MyCustomController'] = function ($c) {
+    return new MyCustomController($c->get('logger'), '', $c->get('App\DataAccess\MyCustomDataAccess'));
+};
+
+$container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
+    return new MyCustomDataAccess($c->get('logger'), $c->get('pdo'), '');
+};
+```
+
+
+
