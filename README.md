@@ -56,7 +56,7 @@ $app->group('/books', function () {
 });
 ```
 
-3. Prepare the Dependencies (dependencies.php)
+3 Prepare the Dependencies (dependencies.php)
 
 If you just want to use the basic CRUD. Nothing to do here! 
 
