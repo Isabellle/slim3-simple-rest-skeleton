@@ -3,6 +3,30 @@
 This is a simple skeleton project for Slim 3 that implements a simple REST API.
 Based on [https://github.com/moritz-h/slim3-rest-skeleton] who is based on [akrabat's slim3-skeleton](https://github.com/akrabat/slim3-skeleton)
 
+## Purpose
+
+Many micro frameworks are not that micro, 19 Mb is not a micro framework. Slim provides a low footprint framework in about 1,5 Mb.
+
+Although Slim gives you the flexibility to organize as you like. I saw a need to organize some basic structures and code for a RestFul API.
+
+Take your time to understand how Slim works. http://www.slimframework.com/docs
+
+## Main specs
+
+- Specially oriented to develop Restful APIs using JSON
+- Reduced footprint
+- Reusable generic Controller and Database access with common CRUD operations
+- No need to define models, database columns for simple access
+- Supports ordering the resource list
+- Create your own custom Controllers and Database access
+- Table name given by the resource name / user defined
+- Best practices in HTTP return codes
+
+## Install
+
+To explain
+
+
 ## Create Database
 
 ```sql
