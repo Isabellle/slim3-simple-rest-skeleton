@@ -26,7 +26,7 @@ To explain
 
 ## Steps for any new table
 
-1 Create Database
+**1 Create Database**
 
 ```sql
 CREATE TABLE IF NOT EXISTS `books` (
@@ -43,7 +43,7 @@ ALTER TABLE `books`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 ```
 
-2 Add the routes (routes.php) Add the controller to the resources. Where _Controller is the generic CRUD controller
+**2 Add the routes (routes.php)**, add the controller to the resources. Where _Controller is the generic CRUD controller
 
 ```php
 // Books controller
@@ -56,7 +56,7 @@ $app->group('/books', function () {
 });
 ```
 
-3 Prepare the Dependencies (dependencies.php)
+**3 Prepare the Dependencies (dependencies.php)**
 
 If you just want to use the basic CRUD. Nothing to do here! 
 
