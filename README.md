@@ -9,6 +9,8 @@ Many micro web frameworks are not that micro, 19 Mb is not a micro framework. Sl
 
 Although Slim gives you the flexibility to organize as you like. I saw a need to organize some basic structures and code for a RestFul API.
 
+**Words of Caution**: this techniques are just my experience and nothing of it has been sanctioned or approved by anyone. Use at your own discretion. 
+
 Take your time to understand how Slim works. http://www.slimframework.com/docs
 
 ## Main specs
@@ -79,6 +81,35 @@ $container['App\Controllers\MyCustomController'] = function ($c) {
 
 $container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
     return new MyCustomDataAccess($c->get('logger'), $c->get('pdo'), '');
+};
+```
+
+## Database table for resource
+
+The database table can be defined in some ways
+
+- automatically by matching with the resource name (using generic _DataAccess as is)
+- by the middleware, assigning settings => localtable. Modify routes.php and change like:
+
+```php
+// Books controller
+$app->group('/books', function () {
+    $this->get   ('',             _Controller::class.':getAll');
+    $this->get   ('/{id:[0-9]+}', _Controller::class.':get');
+    $this->post  ('',             _Controller::class.':add');
+    $this->put   ('/{id:[0-9]+}', _Controller::class.':update');
+    $this->delete('/{id:[0-9]+}', _Controller::class.':delete');
+})**->add(function ($request, $response, $next) {
+    $this->settings['localtable'] = “OtherTable”;
+    $response = $next($request, $response);
+    return $response;**
+});
+```
+- create your own DataAccess class. The third parameter is the table name (if empty takes resource name as the table):
+
+```php
+$container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
+    return new MyCustomDataAccess($c->get('logger'), $c->get('pdo'), ‘OtherTable’);
 };
 ```
 
