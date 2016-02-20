@@ -41,14 +41,15 @@ $container['App\Controllers\_Controller'] = function ($c) {
 
 // Generic DataAccess
 $container['App\DataAccess\_DataAccess'] = function ($c) {
-    return new _DataAccess($c->get('logger'), $c->get('pdo'), '');
+	$localtable = $c->get('settings')['localtable']!='' ? $c->get('settings')['localtable'] : '';
+    return new _DataAccess($c->get('logger'), $c->get('pdo'), $localtable);
 };
 
 
 // Custom Controllers / DataAccess
 // ...
 //$container['App\Controllers\MyCustomController'] = function ($c) {
-//    return new MyCustomController($c->get('logger'), '', $c->get('App\DataAccess\MyCustomDataAccess'));
+//    return new MyCustomController($c->get('logger'), $c->get('App\DataAccess\MyCustomDataAccess'));
 //};
 
 //$container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
