@@ -89,7 +89,7 @@ $container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
 The database table can be defined in some ways
 
 - automatically by matching with the resource name (using generic _DataAccess as is)
-- by the middleware, assigning settings => localtable. Modify **routes.php** and add a group middleware:
+- by the middleware, assigning settings => localtable. Modify **routes.php** and add a group middleware for the resource:
 
 ```php
 // Books controller
