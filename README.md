@@ -89,7 +89,7 @@ $container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
 The database table can be defined in some ways
 
 - automatically by matching with the resource name (using generic _DataAccess as is)
-- by the middleware, assigning settings => localtable. Modify routes.php and change like:
+- by the middleware, assigning settings => localtable. Modify **routes.php** and add a group middleware:
 
 ```php
 // Books controller
@@ -99,10 +99,10 @@ $app->group('/books', function () {
     $this->post  ('',             _Controller::class.':add');
     $this->put   ('/{id:[0-9]+}', _Controller::class.':update');
     $this->delete('/{id:[0-9]+}', _Controller::class.':delete');
-})**->add(function ($request, $response, $next) {
+})->add(function ($request, $response, $next) {
     $this->settings['localtable'] = “OtherTable”;
     $response = $next($request, $response);
-    return $response;**
+    return $response;
 });
 ```
 - create your own DataAccess class. The third parameter is the table name (if empty takes resource name as the table):
