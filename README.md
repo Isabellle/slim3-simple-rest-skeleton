@@ -21,6 +21,7 @@ Take your time to understand how Slim works. http://www.slimframework.com/docs
 - Supports ordering the resource list /books?order=price
 - Table name given by the resource name / user defined
 - Best practices in HTTP return codes
+- API Rate limiter middleware, for throttling excesive requests
 
 ## Install
 
@@ -112,6 +113,10 @@ $container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
     return new MyCustomDataAccess($c->get('logger'), $c->get('pdo'), ‘OtherTable’);
 };
 ```
+
+## API Rate Limiter
+
+Taken from https://github.com/pabloroca/slim3-apiratelimit-middleware but with a better integration
 
 
 
