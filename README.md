@@ -168,6 +168,19 @@ CREATE TABLE oauth_refresh_tokens (refresh_token VARCHAR(40) NOT NULL, client_id
 CREATE TABLE oauth_scopes (scope TEXT, is_default BOOLEAN);
 CREATE TABLE oauth_jwt (client_id VARCHAR(80) NOT NULL, subject VARCHAR(80), public_key VARCHAR(2000), CONSTRAINT jwt_client_id_pk PRIMARY KEY (client_id));
 ```
+We are going to use our own user table, so we create a table like this:
+
+```SQL
+CREATE TABLE IF NOT EXISTS `users` (
+`id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1;
+
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`), ADD KEY `email` (`email`);
+```
+For using a custom user table, I should create **_oAuth2_CustomStorage.php** who binds data fro this user table to oAuth2
 
 For using oAuth in a resource, you must use _Controller_oAuth2 or extend it. See **routes.php**
 
