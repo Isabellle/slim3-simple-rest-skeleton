@@ -214,10 +214,11 @@ It's recommended to understand how oAuth2 works. But in short:
 - you request the resource with that token
 - when token expires, you start over again
 
-Getting a ClientCredentials token:
+**Getting a ClientCredentials token**
 
 ```
 request: https://apy.mydomain.com/oauth/token
+Method: POST
 Request headers send:
 Content-Type: application/x-www-form-urlencoded
 Body send:
@@ -226,10 +227,11 @@ client_id=MYCLIENTD&client_secret=MYCLIENTSECRET&grant_type=client_credentials
 
 Where MYCLIENTD is column client_id and MYCLIENTSECRET is column client_secret from table oauth_clients
 
-Getting a UserCredentials token:
+**Getting a UserCredentials token**
 
 ```
 request: https://apy.mydomain.com/oauth/token
+Method: POST
 Request headers send:
 Content-Type: application/x-www-form-urlencoded
 Body send:
@@ -237,4 +239,14 @@ client_id=MYCLIENTD&client_secret=MYCLIENTSECRET&grant_type=password&username=US
 ```
 
 Where USEREMAIL is column email and USERPASSWORD is column password from table users. The password is encoded with SHA1 in the table
+
+**Accesing a resource with a token**
+
+```
+request: https://apy.mydomain.com/books
+Request headers send:
+Content-Type: application/json
+Authorization: Bearer MYTOKEN
+```
+
 
