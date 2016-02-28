@@ -153,8 +153,8 @@ Using https://github.com/bshaffer/oauth2-server-php. This library is one of the 
 
 For now implemented this grants (in **dependencies.php**) as an oAuth container:
 
-* UserCredentials
-* ClientCredentials
+* Resource Owner Password Credentials
+* Client Credentials
 
 **Additional step required for oAuth**
 
@@ -184,7 +184,7 @@ For using a custom user table, I should create **_oAuth2_CustomStorage.php** who
 
 For using oAuth in a resource, you must use _Controller_oAuth2 or extend it. See **routes.php**
 
-This resource is for retrieving a token (user or client)
+This resource is for retrieving a token (Resource Owner Password Credentials or Client Credentials)
 ```php
 // oAuth2
 $app->group('/oauth', function () {
@@ -204,7 +204,7 @@ $app->group('/books', function () {
 });
 ```
 
-Grant can be UserCredentials or ClientCredentials, inspect **_Controller_oAuth2.php** and you will see that getAll and get just need Client credentials grant and the others needs UserCredentials grant
+Grant can be Resource Owner Password Credentials or Client Credentials, inspect **_Controller_oAuth2.php** and you will see that **getAll** and **get** just need Client Credentials grant and the others needs Resource Owner Password Credentials grants.
 
 **Calling oAuth**
 
@@ -214,7 +214,7 @@ It's recommended to understand how oAuth2 works. But in short:
 - you request the resource with that token
 - when token expires (receiving HTTP 401 status), you start over again
 
-**Getting a ClientCredentials token**
+**Getting a Client Credentials token**
 
 ```
 request: https://apy.mydomain.com/oauth/token
@@ -227,7 +227,7 @@ client_id=MYCLIENTD&client_secret=MYCLIENTSECRET&grant_type=client_credentials
 
 Where MYCLIENTD is column client_id and MYCLIENTSECRET is column client_secret from table oauth_clients
 
-**Getting a UserCredentials token**
+**Getting a Resource Owner Password Credentials token**
 
 ```
 request: https://apy.mydomain.com/oauth/token
