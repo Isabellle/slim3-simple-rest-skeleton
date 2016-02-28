@@ -212,7 +212,7 @@ It's recommended to understand how oAuth2 works. But in short:
 
 - you get a token
 - you request the resource with that token
-- when token expires, you start over again
+- when token expires (receiving HTTP 401 status), you start over again
 
 **Getting a ClientCredentials token**
 
