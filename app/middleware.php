@@ -2,13 +2,21 @@
 
 // Application middleware
 
-// e.g: $app->add(new \Slim\Csrf\Guard);
-
 $app->add(function ($request, $response, $next) {
+
     $responsen = $response->withHeader('Content-Type', 'application/json')
                           ->withHeader('X-Powered-By', $this->settings['PoweredBy']);
 	
+	
+	$APIRateLimit = new App\Utils\APIRateLimiter($this);
+	$mustbethrottled = $APIRateLimit();
+	
+	if ($mustbethrottled == false) {
     $responsen = $next($request, $responsen);
+	} else {
+        $responsen = $responsen ->withStatus(429)
+                                ->withHeader('RateLimit-Limit', $this->settings['apithrottle']['requests']);
+	}
 
     return $responsen;
 });
