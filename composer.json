@@ -22,6 +22,9 @@
     },
     "require": {
         "slim/slim": "^3.0",
-        "monolog/monolog": "^1.13"
+        "monolog/monolog": "^1.13",
+        "bshaffer/oauth2-server-php": "^1.8",
+        "bshaffer/oauth2-server-httpfoundation-bridge": "^1.1",
+        "symfony/psr-http-message-bridge": "^0.2.0"
     }
 }

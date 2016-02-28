@@ -7,9 +7,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
 /**
- * Class ApiController.
+ * Class _ApiController
  */
-final class ApiController
+final class _ApiController
 {
     /**
      * @var \Psr\Log\LoggerInterface

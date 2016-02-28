@@ -11,17 +11,17 @@ use App\DataAccess\_DataAccess;
 /**
  * Class _Controller.
  */
-final class _Controller
+class _Controller
 {
     /**
      * @var \Psr\Log\LoggerInterface
      */
-    private $logger;
+    protected $logger;
 
     /**
      * @var \App\DataAccess
      */
-    private $dataaccess;
+    protected $dataaccess;
 
     /**
      * @param \Psr\Log\LoggerInterface       $logger
@@ -93,6 +93,7 @@ final class _Controller
 		        $RequesPort = '.'.$request->getUri()->getPort();
 		    }
             $LocationHeader = $request->getUri()->getScheme().'://'.$request->getUri()->getHost().$RequesPort.$request->getUri()->getPath().'/'.$last_inserted_id;
+
             return $response ->withHeader('Location', $LocationHeader)
                              ->withStatus(201);
         } else {

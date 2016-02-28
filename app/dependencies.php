@@ -1,10 +1,14 @@
 <?php
 
-use App\Controllers\ApiController;
+use App\Controllers\_ApiController;
 
 // Generic Controllers / DataAccess
 use App\Controllers\_Controller;
+use App\Controllers\_Controller_oAuth2;
 use App\DataAccess\_DataAccess;
+
+use App\DataAccess\_oAuth2_CustomStorage;
+use App\Controllers\_oAuth2TokenController;
 
 // Custom Controllers / DataAccess
 //use App\Controllers\MyCustomController;
@@ -29,9 +33,24 @@ $container['pdo'] = function ($c) {
     return new PDO($settings['dsn'], $settings['username'], $settings['password']);
 };
 
+// oAuth
+$container['oAuth'] = function ($c) {
+	
+    $storage = new App\DataAccess\_oAuth2_CustomStorage($c->get('pdo'));
+
+    // Pass a storage object or array of storage objects to the OAuth2 server class
+    $server = new OAuth2\Server($storage);
+    
+    // add grant types
+	$server->addGrantType(new OAuth2\GrantType\UserCredentials($storage));
+    $server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
+
+    return $server;
+};
+
 // APIController
-$container['App\Controllers\ApiController'] = function ($c) {
-    return new ApiController($c->get('logger'),$c->get('settings')['PoweredBy']);
+$container['App\Controllers\_ApiController'] = function ($c) {
+    return new _ApiController($c->get('logger'),$c->get('settings')['PoweredBy']);
 };
 
 // Generic Controller
@@ -44,6 +63,20 @@ $container['App\DataAccess\_DataAccess'] = function ($c) {
 	$localtable = $c->get('settings')['localtable']!='' ? $c->get('settings')['localtable'] : '';
     return new _DataAccess($c->get('logger'), $c->get('pdo'), $localtable);
 };
+
+// oAuth Controller for retrieving tokens
+$container['App\Controllers\_oAuth2TokenController'] = function ($c) {
+    return new _oAuth2TokenController($c->get('logger'), $c->get('oAuth'));
+};
+
+// Generic Controller oAuth2
+$container['App\Controllers\_Controller_oAuth2'] = function ($c) {
+    return new _Controller_oAuth2($c->get('logger'), $c->get('App\DataAccess\_DataAccess'), $c->get('oAuth'));
+};
+
+
+
+
 
 
 // Custom Controllers / DataAccess
