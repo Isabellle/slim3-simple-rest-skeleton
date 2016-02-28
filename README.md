@@ -29,7 +29,7 @@ To explain better.
 
 **1 API Rate limiter install**
 
-First , we ereate the table xrequests where all incoming requests are registered
+First , we create the table xrequests where all incoming requests are registered
 
 ```sql
 CREATE TABLE IF NOT EXISTS `xrequests` (
@@ -44,7 +44,7 @@ ALTER TABLE `xrequests`
 ALTER TABLE `xrequests`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 ```
-Then we define the requests and in how many minutes they will be stopped, in **dddd**
+Then we define the requests and in how many minutes they will be stopped, in **settings.php**
 
 ```php
 // api rate limiter settings
