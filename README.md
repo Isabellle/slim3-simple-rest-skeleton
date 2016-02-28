@@ -105,7 +105,7 @@ $app->group('/books', function () {
     return $response;
 });
 ```
-- create your own DataAccess class. The third parameter is the table name (if empty takes resource name as the table):
+- create your own DataAccess class in **dependencies.php**. The third parameter is the table name (if empty takes resource name as the table):
 
 ```php
 $container['App\DataAccess\MyCustomDataAccess'] = function ($c) {
