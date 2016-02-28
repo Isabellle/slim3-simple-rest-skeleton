@@ -53,7 +53,7 @@ Then we define the requests and in how many minutes they will be stopped, in **s
     'inmins' => '60',
 ],
 ```
-
+Read more about API Rate Limiter, here https://github.com/pabloroca/slim3-apiratelimit-middleware
 
 ## Steps for any new resource/table
 
